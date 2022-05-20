@@ -4,8 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Главная Night-Торрент</title>
-  <link rel="shortcut icon" type="image/png" href="logo1.png">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <style >
 
@@ -15,8 +14,109 @@
 
   	
   </style>
-	<script src="mongoDB.js"></script>
+	<style>
+		body{
 
+
+			font-size: 16px;
+			margin-top: 70px;
+		}
+
+		.asat{
+			margin-top: -10px;
+			width: 1219.35px;
+			height: 1380px;
+			background-color: white;
+
+
+		}
+
+		ul {
+			display: block;
+			list-style-type: disc;
+			margin-block-start: 1em;
+			margin-block-end: 1em;
+			margin-inline-start: 0px;
+			margin-inline-end: 0px;
+			padding-inline-start: 40px;
+		}
+
+		#nav-miniprofile-link {
+			float: right;
+			height: 35px;
+			margin-top: 0;
+			padding: 7px;
+			position: relative;
+			text-align: right;
+		}
+
+		#menuigr {
+			margin-top: 50px;
+			padding: 0 0 0 50px;
+			list-style-type: none;
+		}
+
+		#marqueeline {
+			font-family: 'Comfortaa', cursive;
+			padding-left: 60px;
+			color: #28a745;
+		}
+
+		.img-filter {
+			margin: 20px;
+		}
+		.img-filter:hover {
+			margin: 20px;
+			filter: drop-shadow(0 0 20px #10b5e8);
+		}
+
+		.marquee {
+			width: 450px;
+			margin: 0 auto;
+			white-space: nowrap;
+			overflow: hidden;
+			margin-top: 100px;
+
+		}
+
+		.marquee span {
+			display: inline-block;
+			padding-left: 100%;
+			animation: marquee 25s linear infinite;
+		}
+
+
+
+		@keyframes marquee {
+			0%   { transform: translate(0, 0); }
+			100% { transform: translate(-100%, 0); }
+		}
+
+		.tt{
+			font-family:'Comfortaa', cursive ;
+			margin-left: 60px;
+			width: 200;
+			font-size: 22px;
+			color:#28a745 ;
+		}
+		.tt:hover{
+			margin-left: 60px;
+			color:#10b5e8 ;
+
+		}
+
+
+		#instructions {
+			position: absolute;
+			color: #666;
+			bottom: 0;
+			padding-bottom: 6px;
+			font-family: sans-serif;
+			width: 100%;
+			text-align: center;
+			pointer-events: none;
+		}
+	</style>
 
 </head>
 
@@ -41,7 +141,7 @@
 			</p>
 		</form>
 	<div class="col-md-9" id="nav-miniprofile-link" style="margin-top: -60px; margin-left: 100px; position:absolute;" >
-			<a href="login.html" style="text-decoration:none; color:lightcyan;">
+			<a href="" style="text-decoration:none; color:lightcyan;">
 				<span class="avatar" >
 					<img src="img/noavatar.png" style="height: 42px; border-radius: 8px;"  >
 				</span>
@@ -80,7 +180,7 @@
 	        	<li><a href="#" class ="btn btn-success"style="text-decoration: none; margin-block-end:10px;width: 250px; border-radius: 8px; font-family: 'Calibri' ; font-size: 18px">РПГ</a></li>
 	        	<li><a href="#" class ="btn btn-success"style="text-decoration: none; margin-block-end:10px;width: 250px; border-radius: 8px; font-family: 'Calibri' ; font-size: 18px">От 1-го лица</a></li>
 	        	<li><a href="#" class ="btn btn-success"style="text-decoration: none; margin-block-end:10px;width: 250px; border-radius: 8px; font-family: 'Calibri' ; font-size: 18px">От 3-го лица</a></li>
-	        	<li><a href="#" class ="btn btn-success"style="text-decoration: none; margin-block-end:10px;width: 250px; border-radius: 8px; font-family: 'Calibri' ; font-size: 18px">Хорроры</a></li>
+	        	<li><a href="#" class ="btn btn-success"style="text-decoration: none; margin-block-end:10px;width: 250px; border-radius: 8px; font-family: 'Calibri',serif ; font-size: 18px">Хорроры</a></li>
 	        	<li><a href="#" class ="btn btn-success"style="text-decoration: none; margin-block-end:10px;width: 250px; border-radius: 8px; font-family: 'Calibri' ; font-size: 18px">Приключения</a></li>
 	        	<li><a href="#" class ="btn btn-success"style="text-decoration: none; margin-block-end:10px;width: 250px; border-radius: 8px; font-family: 'Calibri' ; font-size: 18px">Спортивные</a></li>
 	        	<li><a href="#" class ="btn btn-success"style="text-decoration: none; margin-block-end:10px;width: 250px; border-radius: 8px; font-family: 'Calibri' ; font-size: 18px">VR-игры</a></li>
@@ -180,7 +280,7 @@
   </div>
   
 </div>
-</div>
+
   <div class=" col-md-12 container-fluid shadow bg-success  " style="height: 40px; background-color: #28a745;  ">
   	
   </div>
@@ -196,20 +296,8 @@
      </center>
     </div> 
 
-<script type="text/javascript" src="mongoDB.js"></script>
-<script>
-	THREE.ShapeUtils.triangulateShape = (function () {
-	        var pnlTriangulator = new PNLTRI.Triangulator();
-	        return function triangulateShape(contour, holes) {
-	            return pnlTriangulator.triangulate_polygon([contour].concat(holes));
-	        };
-	    })();
-</script>
 
-<div id="three-container"></div>
 
-<div id="instructions">
 
-</div>
 </body>
 </html>

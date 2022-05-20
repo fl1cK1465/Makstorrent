@@ -2,9 +2,9 @@
   "name": "project-webka",
   "version": "1.0.0",
   "description": "",
-  "main": "mongoDB.js",
+  "main": "1.js",
   "scripts": {
-    "start": "nodemon mongoDB.js  "
+    "start": "nodemon 1.js  "
   },
   "keywords": [],
   "author": "",
