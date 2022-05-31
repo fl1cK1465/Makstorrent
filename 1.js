@@ -1,8 +1,3 @@
-if (process.env.NODE_ENV !== 'production'){
-    require('dotenv').config()
-}
-
-
 
 const express = require('express')
 const PORT = process.env.PORT || 2051
@@ -13,37 +8,41 @@ const {check} = require('express-validator')
 const session = require('express-session')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
-const initializePassport = require('./passport-config')
-const flash = require('express-flash')
+const localStrategy	= require('passport-local').Strategy;
 
 
+mongoose.connect('mongodb+srv://admin:admin12345@cluster0.04ms6.mongodb.net/userdata',{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 
-initializePassport(
-    passport ,
-        email =>  newUser.find(user => user.email === email),
-        id => newUser.find(user => user.id === id)
-)
-
-
+}).then(()=>{
+    console.log("connection success")
+}).catch((e)=>{
+    console.log("connection failed")
+})
 
 
 
 
 app.set('view engine' , 'ejs')
-app.use( bodyParser.urlencoded({extended:true}))
-app.use(flash())
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-}))
-app.use(passport.initialize())
-app.use(passport.session())
 
-mongoose.connect('mongodb+srv://admin:admin12345@cluster0.04ms6.mongodb.net/userdata')
 
-app.get("/" , (req, res) => {
-    res.sendFile(__dirname+"/1.html")
+
+
+
+
+
+
+app.use( bodyParser.urlencoded({extended:true}));
+
+
+
+
+app.get("/" ,  (req, res) => {
+    res.render("2.ejs")
+})
+app.get('/2', (req,res)=>{
+    res.render('1.ejs')
 })
 
 app.get("/about" ,(req,res
@@ -53,7 +52,7 @@ app.get("/about" ,(req,res
 app.get('/registration', function (req, res) {
     res.render( "registration.ejs");
 })
-app.get('/login', function (req, res) {
+app.get('/login',  (req, res) => {
     res.render("login.ejs");
 })
 app.get('/contacts', function (req, res) {
@@ -99,6 +98,14 @@ app.get('/witcher3', function (req, res) {
 app.get('/metroex', function (req, res) {
     res.sendFile(__dirname + "/metro.html");
 })
+app.get('/logout', function (req, res) {
+
+    res.redirect('/');
+});
+
+app.get('/profile',(req,res)=>{
+    res.render('profile.ejs')
+})
 
 app.use(express.static('public'))
 app.use("/img" , express.static("img"))
@@ -111,19 +118,15 @@ const userSchema = {
     email: {type:String,required:true,unique:true},
     password: {type:String,required:true},
     city:{type:String,required:true,},
-    //isAdmin:{type:Boolean , default:false}
+    isAdmin:{type:Boolean , default:false}
 }
 
 
 
 const User = mongoose.model("User" , userSchema)
 
-app.post('/registration',[
-        check('username','Имя пользавтеля не может быть пустым')
-            .exists()
-            .notEmpty(),
-        check('password', 'Пароль должен содержать не менее 8 символов').isLength({min:8,max:16})],
-    async function (req,res){try {
+app.post('/registration', async function (req,res){
+    try {
         const hashpass = await bcrypt.hash(req.body.password , 8)
         const newUser = new User({
             username: req.body.username,
@@ -131,8 +134,8 @@ app.post('/registration',[
             city: req.body.city,
             password: hashpass,
 
-        })
 
+        })
 
         await newUser.save()
 
@@ -146,12 +149,27 @@ app.post('/registration',[
 
     })
 
-app.post('/login', passport.authenticate({
-    successRedirect:'/',
-    failureRedirect:'/login',
-    failureFlash: true,
+    app.post('/login', async (req,res) => {
+        try {
+            const {username,password} = req.body;
+            const user = await User.findOne({username})
+            if (!user){
 
-}))
+                res.status(400).json({message:`Пользаватель с таким ${username} именем не существует `})
+            }
+            const validPass = await User.findOne({password})
+            if (!validPass){
+                res.status(400).json({message:`Пароль неверный`})
+            }
+            else {
+                res.redirect('/2')
+            }
+        }catch (e) {
+
+        }
+    });
+
+
 
 async function start(){
     try {

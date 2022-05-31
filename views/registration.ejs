@@ -13,7 +13,43 @@
   	@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500&display=swap');
   	@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500&family=Comfortaa:wght@600&display=swap');
   </style>
+<script>
+	function NK() {
+		var name = document.forms["RegForm"]["username"];
+		var city = document.forms["RegForm"]["city"];
+		var email = document.forms["RegForm"]["email"];
+		var password = document.forms["RegForm"]["password"];
 
+		if (name.value == "") {
+			window.alert("Поле для имени пользаветеля не должно пустым");
+			name.focus();
+			return false;
+		}
+
+		if (email.value == "") {
+			window.alert(
+					"Поле для почты не должно быть пустым");
+			email.focus();
+			return false;
+		}
+
+		if (password.value == "") {
+			window.alert("Поле для пароля не должно быть пустым");
+			password.focus();
+			return false;
+		}
+		var passid_len = password.value.length;
+		if (passid_len == 0 || passid_len < 8)
+		{
+			alert("Пароль должен составить минимум 8 символов");
+		}
+		var y = password.value;
+		if(y.search(/[_!@#$%^&*]/) > 0) {
+			alert("Пароль не должен содержать специальные сивмолы по типу'_!@#$%^&*")
+		}
+		return true;
+	}
+</script>
 
 
 
@@ -89,7 +125,7 @@
   	 	</div>
   	 	<div class="col-md-4" >
 
-			<form name="regform" onsubmit="return NK()"  style="padding-top:200px; padding-left: 70px; width: 450px;" method="post" action="/registration" >
+			<form name="RegForm" onsubmit="return NK()"  style="padding-top:200px; padding-left: 70px; width: 450px;" method="post" action="/registration" >
 				<div class="form-group">
 					<label for="exampleInputEmail1">Имя Пользователя</label>
 					<input name="username"  class="form-control" id="exampleInputEmail1" placeholder="night_torrenT123">
