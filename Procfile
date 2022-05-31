@@ -1,1 +1,1 @@
-web:node 1.js
+web:npm start
