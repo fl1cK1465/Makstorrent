@@ -1,14 +1,13 @@
-
 const express = require('express')
-const PORT = process.env.PORT || 2051
+const port = process.env.PORT || 2051;
 const app = express();
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const {check} = require('express-validator')
-const session = require('express-session')
+
+
+
 const bcrypt = require('bcryptjs')
-const passport = require('passport')
-const localStrategy	= require('passport-local').Strategy;
+
 
 
 mongoose.connect('mongodb+srv://admin:admin12345@cluster0.04ms6.mongodb.net/userdata',{
@@ -26,17 +25,22 @@ mongoose.connect('mongodb+srv://admin:admin12345@cluster0.04ms6.mongodb.net/user
 
 app.set('view engine' , 'ejs')
 
-
-
+const AdminBro = require('admin-bro')
+const expressAdminBro = require('@admin-bro/express')
+const mongooseAdminBro = require('@admin-bro/mongoose')
 
 
 
 
 
 app.use( bodyParser.urlencoded({extended:true}));
+app.get('/shooters' , (req,res) =>{
+    res.sendFile(__dirname+'/shooters.html')
+})
 
-
-
+app.get('/notfound' , (req,res) =>{
+    res.sendFile(__dirname+"/notfound.html")
+})
 
 app.get("/" ,  (req, res) => {
     res.render("2.ejs")
@@ -102,6 +106,9 @@ app.get('/logout', function (req, res) {
 
     res.redirect('/');
 });
+app.get('/surv' , (req,res) =>{
+    res.sendFile(__dirname+'/surv.html')
+})
 
 app.get('/profile',(req,res)=>{
     res.render('profile.ejs')
@@ -113,6 +120,14 @@ app.use(express.static('public'))
 app.use("/css" , express.static("css"))
 
 
+
+
+
+
+
+
+
+
 const userSchema = {
     username: {type:String,required:true,unique: true},
     email: {type:String,required:true,unique:true},
@@ -121,9 +136,18 @@ const userSchema = {
     isAdmin:{type:Boolean , default:false}
 }
 
-
-
 const User = mongoose.model("User" , userSchema)
+
+AdminBro.registerAdapter(mongooseAdminBro)
+const AdminBroOptions = {resources:[User] }
+
+const adminBro = new AdminBro(AdminBroOptions)
+
+
+const router = expressAdminBro.buildRouter(adminBro)
+app.use(adminBro.options.rootPath, router)
+
+
 
 app.post('/registration', async function (req,res){
     try {
@@ -133,7 +157,7 @@ app.post('/registration', async function (req,res){
             email: req.body.email,
             city: req.body.city,
             password: hashpass,
-
+            isAdmin: req.body.isAdmin
 
         })
 
@@ -157,13 +181,12 @@ app.post('/registration', async function (req,res){
 
                 res.status(400).json({message:`Пользаватель с таким ${username} именем не существует `})
             }
-            const validPass = await User.findOne({password})
+            const validPass = await bcrypt.compareSync(password,user.password)
             if (!validPass){
                 res.status(400).json({message:`Пароль неверный`})
             }
-            else {
-                res.redirect('/2')
-            }
+
+
         }catch (e) {
 
         }
@@ -179,12 +202,13 @@ async function start(){
         console.log(e)
     }
 
-    app.listen(PORT, function() {
+    app.listen(port, function() {
         console.log('running at http://localhost:2051/')})
 
 
 }
 
 start()
+
 
 
