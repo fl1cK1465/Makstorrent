@@ -4,8 +4,8 @@
   "description": "",
   "main": "1.js",
   "scripts": {
-    "test": "node 1.js",
-    "start": "nodemon 1.js"
+    "test": "nodemon 1.js",
+    "start": "node 1.js"
   },
   "keywords": [],
   "author": "",
