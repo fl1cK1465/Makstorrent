@@ -14,10 +14,6 @@ mongoose.connect('mongodb+srv://admin:admin12345@cluster0.04ms6.mongodb.net/user
     useNewUrlParser: true,
     useUnifiedTopology: true,
 
-}).then(()=>{
-    console.log("connection success")
-}).catch((e)=>{
-    console.log("connection failed")
 })
 
 
