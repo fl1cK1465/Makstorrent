@@ -68,26 +68,26 @@ app.get("/codmw" ,(req,res
     res.sendFile(__dirname+"/codmw.html")
 })
 app.get('/darksouls', function (req, res) {
-    res.sendFile(__dirname + "/darksouls.html");
+    res.sendFile(__dirname + "/darksouls.html")
 })
 app.get('/fifa', function (req, res) {
-    res.sendFile(__dirname + "/fifa.html");
+    res.sendFile(__dirname + "/fifa.html")
 })
 app.get('/farcry', function (req, res) {
-    res.sendFile(__dirname + "/farcry.html");
+    res.sendFile(__dirname + "/farcry.html")
 })
 app.get("/detroit" ,(req,res
 ) => {
     res.sendFile(__dirname+"/detroit.html")
 })
 app.get('/GoD', function (req, res) {
-    res.sendFile(__dirname + "/god.html");
+    res.sendFile(__dirname + "/god.html")
 })
 app.get('/mafia', function (req, res) {
-    res.sendFile(__dirname + "/mafia.html");
+    res.sendFile(__dirname + "/mafia.html")
 })
 app.get('/nfs', function (req, res) {
-    res.sendFile(__dirname + "/nfs.html");
+    res.sendFile(__dirname + "/nfs.html")
 })
 app.get("/GTAV" ,(req,res
 ) => {
