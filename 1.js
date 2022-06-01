@@ -109,6 +109,43 @@ app.get('/surv' , (req,res) =>{
 app.get('/profile',(req,res)=>{
     res.render('profile.ejs')
 })
+app.get('/3rd' , (req,res)=>{
+    res.sendFile(__dirname+'/3rd.html')
+})
+app.get('/1st' , (req,res)=>{
+    res.sendFile(__dirname+'/1st.html')
+})
+
+app.get('/strat' , (req,res)=>{
+    res.sendFile(__dirname+'/strat.html')
+})
+
+
+app.get('/openw' , (req,res)=>{
+    res.sendFile(__dirname+'/openw.html')
+})
+
+app.get('/race' , (req,res)=>{
+    res.sendFile(__dirname+'/race.html')
+})
+app.get('/sport' , (req,res)=>{
+    res.sendFile(__dirname+'/sport.html')
+})
+app.get('/action' , (req,res)=>{
+    res.sendFile(__dirname+'/action.html')
+})
+app.get('/adventure' , (req,res)=>{
+    res.sendFile(__dirname+'/adventure.html')
+})
+app.get('/rpg' , (req,res)=>{
+    res.sendFile(__dirname+'/rpg.html')
+})
+
+
+
+
+
+
 
 app.use(express.static('public'))
 app.use("/img" , express.static("img"))
@@ -153,7 +190,7 @@ app.post('/registration', async function (req,res){
             email: req.body.email,
             city: req.body.city,
             password: hashpass,
-            isAdmin: req.body.isAdmin
+
 
         })
 
@@ -180,6 +217,9 @@ app.post('/registration', async function (req,res){
             const validPass = await bcrypt.compareSync(password,user.password)
             if (!validPass){
                 res.status(400).json({message:`Пароль неверный`})
+            }
+            else {
+                res.redirect('/2')
             }
 
 
