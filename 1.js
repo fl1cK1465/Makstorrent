@@ -107,7 +107,7 @@ app.get('/surv' , (req,res) =>{
 })
 
 app.get('/profile',(req,res)=>{
-    res.render('profile.ejs')
+    res.render('profile.ejs' , {User:{isAdmin : req.params.isAdmin}})
 })
 app.get('/3rd' , (req,res)=>{
     res.sendFile(__dirname+'/3rd.html')
@@ -160,7 +160,7 @@ app.use("/css" , express.static("css"))
 
 
 
-
+//usermodels
 const userSchema = {
     username: {type:String,required:true,unique: true},
     email: {type:String,required:true,unique:true},
@@ -170,7 +170,7 @@ const userSchema = {
 }
 
 const User = mongoose.model("User" , userSchema)
-
+//adminpanel
 AdminBro.registerAdapter(mongooseAdminBro)
 const AdminBroOptions = {resources:[User] }
 
@@ -180,7 +180,7 @@ const adminBro = new AdminBro(AdminBroOptions)
 const router = expressAdminBro.buildRouter(adminBro)
 app.use(adminBro.options.rootPath, router)
 
-
+//auth
 
 app.post('/registration', async function (req,res){
     try {
@@ -196,7 +196,7 @@ app.post('/registration', async function (req,res){
 
         await newUser.save()
 
-        res.redirect('/registration')
+        res.redirect('/login')
     }catch (e) {
         console.log(e)
     }
