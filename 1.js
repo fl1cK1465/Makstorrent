@@ -171,14 +171,14 @@ const userSchema = {
 
 const User = mongoose.model("User" , userSchema)
 //adminpanel
-AdminBro.registerAdapter(mongooseAdminBro)
-const AdminBroOptions = {resources:[User] }
+    AdminBro.registerAdapter(mongooseAdminBro)
+    const AdminBroOptions = {resources:[User] }
 
-const adminBro = new AdminBro(AdminBroOptions)
+    const adminBro = new AdminBro(AdminBroOptions)
 
 
-const router = expressAdminBro.buildRouter(adminBro)
-app.use(adminBro.options.rootPath, router)
+    const router = expressAdminBro.buildRouter(adminBro)
+    app.use(adminBro.options.rootPath, router)
 
 //auth
 
