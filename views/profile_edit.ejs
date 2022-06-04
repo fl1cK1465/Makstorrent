@@ -46,15 +46,15 @@
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-7 my-5 ">
-                <fieldset style="border: 2px solid gray">
-                    <h2 style="font-size: 30px" class="display-4 mx-3 my-1">Profile</h2>
+                <fieldset style="margin-left:50px">
+                    <h2 style="font-size: 30px" class="display-4 mx-3 my-1">Профиль</h2>
                     <hr>
                     <div class="p-3">
                         <form action="/profile_edit" method="post">
                             <input type="text" name="username" value="<%= user.username %>"><br><br>
                             <input type="text" name="email" value="<%= user.email %>"><br><br>
                             <input type="text" name="city" value="<%= user.city %>"><br><br>
-                            <button class="btn btn-info">Update</button>
+                            <button class="btn btn-outline-info">Подтвердить измения</button>
                         </form>
                     </div>
                 </fieldset>

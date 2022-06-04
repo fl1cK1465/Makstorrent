@@ -43,21 +43,21 @@
 
 </div >
 <div class="container-fluid ">
-    <div class="col-md-12" s">
+    <div class="col-md-12" ">
         <div class="row">
             <div class="col-md-7 my-5 " >
-                <fieldset style="border: 2px solid gray">
-                    <h2 style="font-size: 30px" class="display-4 mx-3 my-1">Profile</h2>
+                <fieldset style="margin-left: 50px">
+                    <h2 style="font-size: 30px" class="display-4 mx-3 my-1">Профиль</h2>
                     <hr>
                     <div class="p-3">
-                        <p class="lead">Username: <%= user.username %></p>
-                        <p class="lead">Email: <%= user.email %></p>
-                        <p class="lead">City: <%= user.city %></p>
-                        <p class="lead">Admin: <%= user.isAdmin %></p>
+                        <p class="lead">Имя пользователя: <%= user.username %></p>
+                        <p class="lead">Почта: <%= user.email %></p>
+                        <p class="lead">Город: <%= user.city %></p>
+
                         <% if (user.isAdmin) { %>
-                            <button onclick="location.href='/admin'" class="btn btn-success">Admin Panel</button>
+                            <button onclick="location.href='/admin'" class="btn btn-outline-success" style="margin-right: 10px">Админ панель</button>
                         <% } %>
-                        <button onclick="location.href='/profile_edit'" class="btn btn-info">Edit</button>
+                        <button onclick="location.href='/profile_edit'" class="btn btn-outline-info">Изменить</button>
                     </div>
                 </fieldset>
             </div>
@@ -80,7 +80,7 @@
 <br><br><br>
 <br><br><br>
 <br><br><br>
-<div class=" col-md-12 shadow bg-success  " style="height: 40px; width:  120%;background-color: #28a745;  ">
+<div class=" col-md-12 shadow bg-success  " style="height: 40px; width:  120%;background-color: #28a745;margin-top: 190px  ">
 
 </div>
 <div class="col-md-12 container-fluid" style="height: 80px;  background-color: #328545; z-index: -3; ">
