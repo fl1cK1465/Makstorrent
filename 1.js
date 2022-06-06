@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs')
 const router = require('./router')
 const User = require('./usermodel')
-
+const Comment = require('./comment-model')
 
 
 
@@ -154,7 +154,7 @@ app.use(router)
 
 //adminpanel
 AdminBro.registerAdapter(mongooseAdminBro)
-const AdminBroOptions = {resources: [User]}
+const AdminBroOptions = {resources: [User,Comment]}
 
 const adminBro = new AdminBro(AdminBroOptions)
 
