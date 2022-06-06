@@ -285,7 +285,13 @@
   
 </div>
 <br><br>
-<div class="container">
+<div class="container"><form action="/comment" method="post">
+		<label for="text"> Комментарий </label>
+		<textarea class="form-control border-1 border-dark" id="text" name="text"></textarea>
+		<br>
+		<input type="hidden" name="_method" value="DELETE">
+		<button class="btn btn-outline-info " type="submit">Отправить</button>
+	</form><br>
 	<% com.slice().reverse().forEach(function(c) { %>
 		<fieldset class=" border border-success p-1">
 			<p class="my-2"><%= c.user.username %> (<%= c.date %>)</p>
@@ -294,14 +300,8 @@
 			<p class="lead"><%= c.text %></p>
 		</fieldset>
 
-	<% }); %>
-	<form action="/comment" method="post">
-		<label for="text"> Комментарий </label>
-		<textarea class="form-control border-1 border-dark" id="text" name="text"></textarea>
-		<br>
+	<% }); %><br>
 
-		<button class="btn btn-outline-info " type="submit">Отправить</button>
-	</form>
 </div>
 <br><br>
 
