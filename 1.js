@@ -5,6 +5,13 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs')
+const router = require('./router')
+const User = require('./usermodel')
+
+
+
+
+
 
 mongoose.connect('mongodb+srv://admin:admin12345@cluster0.04ms6.mongodb.net/userdata', {
     useNewUrlParser: true,
@@ -20,7 +27,9 @@ const expressAdminBro = require('@admin-bro/express')
 const mongooseAdminBro = require('@admin-bro/mongoose')
 
 
-app.use(bodyParser.urlencoded({extended: true}));
+
+
+app.use(bodyParser.urlencoded({extended: false}));
 app.get('/shooters', (req, res) => {
     res.sendFile(__dirname + '/shooters.html')
 })
@@ -32,9 +41,7 @@ app.get('/notfound', (req, res) => {
 app.get("/", (req, res) => {
     res.render("2.ejs")
 })
-app.get('/2', (req, res) => {
-    res.render('1.ejs')
-})
+
 
 app.get("/about", (req, res
 ) => {
@@ -130,24 +137,21 @@ app.get('/rpg', (req, res) => {
     res.sendFile(__dirname + '/rpg.html')
 })
 
-
+app.use(bodyParser.json());
 app.use(express.static('public'))
 app.use("/img", express.static("img"))
 app.use(express.static('public'))
 app.use("/css", express.static("css"))
 app.use(cookieParser())
-
+app.use(router)
 
 //usermodels
-const userSchema = {
-    username: {type: String, required: true, unique: true},
-    email: {type: String, required: true, unique: true},
-    password: {type: String, required: true},
-    city: {type: String, required: true,},
-    isAdmin: {type: Boolean, default: false}
-}
 
-const User = mongoose.model("User", userSchema)
+
+
+
+
+
 //adminpanel
 AdminBro.registerAdapter(mongooseAdminBro)
 const AdminBroOptions = {resources: [User]}
@@ -160,10 +164,14 @@ async function isAdmin(req, res, next) {
     return next()
 }
 
-const router = expressAdminBro.buildRouter(adminBro)
-app.use(adminBro.options.rootPath, isAdmin, router)
+const rrouter = expressAdminBro.buildRouter(adminBro)
+app.use(adminBro.options.rootPath, isAdmin, rrouter)
 
-//auth
+
+
+
+
+
 
 app.post('/registration', async function (req, res) {
     try {
@@ -208,6 +216,7 @@ app.post('/login', async (req, res) => {
 
 app.get('/profile', async (req, res) => {
     try {
+
         const user = await User.findOne({username: req.cookies.login})
         res.render('profile', {user: user})
     } catch (e) {
@@ -217,7 +226,10 @@ app.get('/profile', async (req, res) => {
 
 app.get('/profile_edit', async (req, res) => {
     try {
+
         const user = await User.findOne({username: req.cookies.login})
+
+
         res.render('profile_edit', {user: user})
     } catch (e) {
         console.log(e)
@@ -256,6 +268,7 @@ async function start() {
 }
 
 start()
+
 
 
 
