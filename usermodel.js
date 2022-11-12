@@ -7,6 +7,7 @@ const userSchema = new Schema({
     password: {type: String, required: true},
     city: {type: String, required: true,},
     isAdmin: {type: Boolean, default: false}
+    img: {type: String}
 })
 
 module.exports = model('User' , userSchema)
